@@ -63,7 +63,7 @@ void creacionPlantilla(char vector[], int*fila, int*mina){
 
 
 void buscaminas(){
-    int fila,filaDoble,mina,numeroUsuario,count=1,*vectorComprobar[MAX_TABLERO];
+    int fila,filaDoble,mina,numeroUsuario,count=1,vectorComprobar[MAX_TABLERO];
     bool bomba = false;
     char vector[40];
 
@@ -91,7 +91,7 @@ void buscaminas(){
             printf("Introduce un valor valido:  ");
             scanf("%d",&numeroUsuario);
             printf("\n");
-        } while (numeroUsuario<MIN || numeroUsuario>fila || comprobarInput(vectorComprobar,numeroUsuario));
+        } while (numeroUsuario<MIN || numeroUsuario>fila || comprobarInput(vectorComprobar,numeroUsuario,fila));
         numeroUsuario--;
         if (vector[numeroUsuario + fila]=='M')
         {
@@ -113,21 +113,23 @@ void buscaminas(){
     printf("Tablero de juego\n\n");
     for (int i = fila; i < filaDoble; i++)
     {
-        printf("%.2d:%c ",i-9,vector[i]);
+        printf("%.2d:%c ",i-fila+1,vector[i]);
     }
     printf("\n\nPresiona una tecla para continuar");
     getch();
 }
 
-bool comprobarInput(int *vectorComprobar,int numeroUsuario){
-    int count=0;
+bool comprobarInput(int *vectorComprobar,int numeroUsuario, int fila){
     bool result = false;
     
-    for (int i = 0; i <= count+1; i++)
+    for (int i = 0; i < fila; i++)
     {
-       if(vectorComprobar[i]==numeroUsuario){result = true;}
+       if(vectorComprobar[i] == numeroUsuario){
+            result = true;
+        }else if(vectorComprobar[i]==0){
+            vectorComprobar[i] = numeroUsuario;
+            break;
+        }
     }
-    vectorComprobar[count]=numeroUsuario;
-    count++;
     return result;
 }

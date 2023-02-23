@@ -18,5 +18,5 @@
     void traspasoValores(int*,int*);
     void creacionPlantilla(char vector[],int*,int*);
     void buscaminas();
-    bool comprobarInput(int*,int);
+    bool comprobarInput(int*,int,int);
 #endif /* A05F468A_6A26_4161_B5EF_84D2E935EA11 */
